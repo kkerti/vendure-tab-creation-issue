@@ -1,3 +1,4 @@
+import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import {
     dummyPaymentHandler,
     DefaultJobQueuePlugin,
@@ -9,7 +10,7 @@ import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import 'dotenv/config';
 import path from 'path';
-
+import { TabPlugin } from './plugins/tab/tab.plugin';
 const IS_DEV = process.env.APP_ENV === 'dev';
 const serverPort = +process.env.PORT || 3000;
 
@@ -94,6 +95,14 @@ export const config: VendureConfig = {
             adminUiConfig: {
                 apiPort: serverPort,
             },
+            app: compileUiExtensions({
+                outputPath: path.join(__dirname, '../admin-ui'),
+                extensions: [
+                    TabPlugin.ui,
+                ],
+                devMode: true,
+            }),
         }),
+        TabPlugin.init({}),
     ],
 };

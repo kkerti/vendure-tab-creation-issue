@@ -20,7 +20,9 @@
     "pg": "8.13.1"
   },
   "devDependencies": {
+    "@types/react": "18.3.12",
     "@vendure/cli": "3.0.5",
+    "@vendure/ui-devkit": "3.0.5",
     "concurrently": "9.0.1",
     "typescript": "5.3.3"
   }
